@@ -61,6 +61,7 @@ def process_sales_data(sales_csv, orders_dir):
         # Append a "GRAND TOTAL" row
         grand_total = order_df['TOTAL PRICE'].sum()
         grand_total_df = pd.DataFrame({'ITEM PRICE': ['GRAND TOTAL:'], 'TOTAL PRICE': [grand_total]})
+        order_df = pd.concat([order_df, grand_total_df])
         # Determine the file name and full path of the Excel sheet
         customer_name = order_df['CUSTOMER NAME'].values[0]
         customer_name =  re.sub(r'\W', '', customer_name)
@@ -82,13 +83,13 @@ def process_sales_data(sales_csv, orders_dir):
         #worksheet.set_column(0, 10, 26, format_1)
         #worksheet.set_column(0, 10, 15, format_2)
         worksheet.set_column(0, 1, 11,  )
-        worksheet.set_column(1, 2, 13, format_3 )
-        worksheet.set_column(2, 3, 15, format_3 )
-        worksheet.set_column(3, 4, 15, format_3 )
-        worksheet.set_column(4, 5, 15, format_3 )
-        worksheet.set_column(5, 6, 13, format_2 )
+        worksheet.set_column(1, 2, 13,  )
+        worksheet.set_column(2, 3, 15,  )
+        worksheet.set_column(3, 4, 15,  ) 
+        worksheet.set_column(4, 5, 15,  )
+        worksheet.set_column(5, 6, 13, )
         worksheet.set_column(6, 7, 13,  format_2)
-        worksheet.set_column(7, 8, 13,  )
+        worksheet.set_column(7, 8, 13, format_2 )
         worksheet.set_column(8, 9, 10,  )
         worksheet.set_column(9, 10, 30, )
         #worksheet.autofit()
@@ -97,7 +98,7 @@ def process_sales_data(sales_csv, orders_dir):
         
         print(order_df)
 
-        break
+        
         
 
 if __name__ == '__main__':
